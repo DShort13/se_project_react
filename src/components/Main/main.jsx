@@ -1,10 +1,17 @@
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import App from "../App/App.jsx";
-// import "../../index.css";
+import WeatherCard from "../WeatherCard/WeatherCard";
 
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+function Main() {
+  return (
+    <main>
+      <WeatherCard />
+      <section className="cards">
+        <p className="cards__text">
+          Today is 75 &deg; F / You may want to wear:
+        </p>
+        {/* TODO - add the cards */}
+      </section>
+    </main>
+  );
+}
+
+export default Main;
