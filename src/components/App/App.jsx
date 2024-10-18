@@ -6,6 +6,7 @@ function App() {
     <div className="page">
       <div className="page__section">
         <Header />
+        {/* <Main /> */}
       </div>
     </div>
   );
