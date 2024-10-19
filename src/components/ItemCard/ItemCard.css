@@ -1,0 +1,35 @@
+.cards {
+}
+
+.cards__text {
+  margin: 0;
+  padding: 40px 0 34px;
+}
+
+.cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+}
+
+.card__title {
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 15px;
+}
+
+.card__image {
+  width: 325px;
+  height: 328px;
+  border: solid rgba(0, 0, 0, 0.3) 1px;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
