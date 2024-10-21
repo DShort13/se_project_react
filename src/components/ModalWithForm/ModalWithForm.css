@@ -8,6 +8,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+}
+
+.modal_opened {
+  visibility: visible;
 }
 
 .modal__content {
@@ -35,6 +40,10 @@
   position: absolute;
   top: 20px;
   right: 28px;
+}
+
+.modal__close:hover {
+  cursor: pointer;
 }
 
 .modal__label {
