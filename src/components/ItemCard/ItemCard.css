@@ -1,9 +1,12 @@
 .cards {
+  font-family: "CabinetGrotesk-Bold", "Arial", sans-serif;
+  font-weight: 700;
 }
 
 .cards__text {
   margin: 0;
   padding: 40px 0 34px;
+  font-size: 20px;
 }
 
 .cards__list {
@@ -24,6 +27,15 @@
   width: 100%;
   text-align: center;
   top: 15px;
+  font-family: "CabinetGrotesk-Bold", "Arial", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #00000099;
+}
+
+.card__title_type_background {
+  background-color: #fff;
+  padding: 2px 12px;
 }
 
 .card__image {
