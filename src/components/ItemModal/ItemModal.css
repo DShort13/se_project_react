@@ -17,6 +17,9 @@
 
 .modal__footer {
   margin: 20px 0 32px 32px;
+  font-family: "CabinetGrotesk-Bold", "Arial", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .modal__caption {
