@@ -27,3 +27,12 @@ It was created using Javascript, CSS, and HTML5.
 #### Images
 
 ![desktop-view](./src/assets/desktop-view.png)
+
+#### Plans for improvement
+
+- Add more customised pictures for the clothing items
+- Add more clothing items for the user to choose from
+
+#### Pages link
+
+https://dshort13.github.io/se_project_react/
