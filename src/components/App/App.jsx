@@ -53,7 +53,6 @@ function App() {
           buttonText="Add garment"
           activeModal={activeModal}
           onClose={closeActiveModal}
-          novalidate
         >
           <label htmlFor="name" className="modal__label">
             Name{" "}
