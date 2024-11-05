@@ -18,6 +18,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [checked, setChecked] = useState(false);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
