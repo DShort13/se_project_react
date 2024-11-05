@@ -1,5 +1,6 @@
 .toggle {
   margin-left: auto;
+  display: flex;
 }
 
 .toggle__input {
