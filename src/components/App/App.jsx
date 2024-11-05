@@ -17,6 +17,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [checked, setChecked] = useState(false);
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -31,6 +32,10 @@ function App() {
     setActiveModal("");
   };
 
+  const handleToggleChange = () => {
+    setChecked(!checked);
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -43,7 +48,12 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+        <Header
+          handleAddClick={handleAddClick}
+          weatherData={weatherData}
+          isOn={checked}
+          handleToggleChange={handleToggleChange}
+        />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
         <Footer />
       </div>
