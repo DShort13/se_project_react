@@ -1,45 +1,50 @@
 .toggle {
   margin-left: auto;
+  padding-right: 20px;
   display: flex;
+  position: relative;
 }
 
 .toggle__input {
-  height: 0;
-  width: 0;
-  visibility: hidden;
+  border-radius: 25px;
+  border: 2px solid #7e7e7e;
+  width: 56px;
+  height: 28px;
+  appearance: none;
 }
 
-.toggle__label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.toggle__slider {
+  border-radius: 20px;
+  width: 28px;
+  height: 28px;
+  background-color: black;
+  color: white;
+  text-align: center;
   cursor: pointer;
-  width: 100px;
-  height: 50px;
-  background: grey;
-  border-radius: 100px;
-  position: relative;
-  transition: background-color 0.2s;
-}
-
-.toggle__label .toggle__button {
-  content: "";
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 45px;
-  height: 45px;
-  border-radius: 45px;
-  transition: 0.2s;
-  background: #fff;
-  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 }
 
-.toggle__input:checked + .toggle__label .toggle__button {
-  left: calc(100% - 2px);
-  transform: translateX(-100%);
+.toggle__slider-C {
+  left: 28px;
 }
 
-.toggle__label:active .toggle__button {
-  width: 60px;
+.toggle__slider-F {
+}
+
+.toggle__temp-F {
+  position: absolute;
+
+  top: -11px;
+  left: 9px;
+}
+
+.toggle__temp-C {
+  position: absolute;
+  top: -11px;
+  left: 38px;
+}
+
+.toggle__active {
+  font-size: 16px;
+  color: white;
 }

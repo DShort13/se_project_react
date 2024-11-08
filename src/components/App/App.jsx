@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+// import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -33,9 +34,9 @@ function App() {
     setActiveModal("");
   };
 
-  const handleToggleChange = () => {
-    setChecked(!checked);
-  };
+  // const handleToggleChange = () => {
+  //   setChecked(!checked);
+  // };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -48,12 +49,15 @@ function App() {
 
   return (
     <div className="page">
+      {/* <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit }}
+      > */}
       <div className="page__content">
         <Header
           handleAddClick={handleAddClick}
           weatherData={weatherData}
           isOn={checked}
-          handleToggleChange={handleToggleChange}
+          // handleToggleChange={handleToggleChange}
         />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
         <Footer />
@@ -135,6 +139,7 @@ function App() {
           onClose={closeActiveModal}
         />
       </div>
+      {/* </CurrentTemperatureUnitContext.Provider> */}
     </div>
   );
 }
