@@ -43,13 +43,12 @@ function App() {
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
-        console.log(filteredData);
         setWeatherData(filteredData);
       })
       .catch(console.error);
   }, []);
 
-  console.log(currentTemperatureUnit);
+  console.log(weatherData);
 
   return (
     <div className="page">
@@ -58,7 +57,11 @@ function App() {
       >
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Main
+            weatherData={weatherData}
+            weatherTemp={weatherData.temp}
+            handleCardClick={handleCardClick}
+          />
           <Footer />
         </div>
         <div>

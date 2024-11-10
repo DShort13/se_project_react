@@ -6,13 +6,13 @@ import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ weatherData, weatherTemp, handleCardClick }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const temp = weatherData?.temp?.[currentTemperatureUnit] || 999;
+  const temp = weatherTemp?.[currentTemperatureUnit] || 999;
 
   return (
     <main className="main">
-      <WeatherCard weatherData={temp} />
+      <WeatherCard weatherData={weatherData} weatherTemp={temp} />
       <section className="cards">
         <h1 className="cards__text">
           Today is {temp} &deg; {currentTemperatureUnit} / You may want to wear:
