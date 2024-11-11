@@ -1,9 +1,12 @@
+import { Routes, Route } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
@@ -57,11 +60,19 @@ function App() {
       >
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main
-            weatherData={weatherData}
-            weatherTemp={weatherData.temp}
-            handleCardClick={handleCardClick}
-          />
+          <Routes>
+            <Route
+              path="/se_project_react/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  weatherTemp={weatherData.temp}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
+            <Route path="/se_project_react/profile" element={<Profile />} />
+          </Routes>
           <Footer />
         </div>
         <div>
