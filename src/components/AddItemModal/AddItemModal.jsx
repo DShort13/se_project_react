@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
   const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleNameChange = (e) => {
     console.log(e.target.value);
     setName(e.target.value);
   };
-
-  const [imageUrl, setImageUrl] = useState("");
 
   const handleUrlChange = (e) => {
     console.log(e.target.value);
@@ -19,8 +18,19 @@ function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl });
+    onAddItem({ name, imageUrl }, resetForm);
   };
+
+  const resetForm = () => {
+    setName("");
+    setImageUrl("");
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   return (
     <div>
