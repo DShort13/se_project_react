@@ -8,8 +8,6 @@ function ToggleSwitch() {
     CurrentTemperatureUnitContext
   );
 
-  console.log(currentTemperatureUnit);
-
   return (
     <label htmlFor="toggle__input" className="toggle">
       <input
