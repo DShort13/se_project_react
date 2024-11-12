@@ -12,7 +12,7 @@ function Header({ handleAddClick, weatherData }) {
 
   return (
     <header className="header">
-      <Link to="/se_project_react/">
+      <Link to="/">
         <img className="header__logo" src={logo} alt="App logo" />
       </Link>
       <p className="header__date-and-location">
