@@ -4,7 +4,7 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({ onCardClick, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -20,7 +20,7 @@ function Header({ handleAddClick, weatherData }) {
       </p>
       <ToggleSwitch />
       <button
-        onClick={handleAddClick}
+        onClick={onCardClick}
         type="button"
         className="header__add-clothes-btn"
       >
