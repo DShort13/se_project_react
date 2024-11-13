@@ -12,7 +12,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { getClothingItems } from "../../utils/api";
+import { addClothingItems, getClothingItems } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -34,8 +34,13 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleAddItem = (newItem) => {
-    setClothingItems([newItem, ...clothingItems]);
+  const handleAddItem = ({ name, imageUrl, weather }) => {
+    addClothingItems({ name, imageUrl, weather })
+      .then((data) => {
+        setClothingItems([data, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const closeActiveModal = () => {
@@ -60,8 +65,8 @@ function App() {
   useEffect(() => {
     getClothingItems()
       .then((data) => {
-        console.log(data);
         setClothingItems(data);
+        console.log(data);
       })
       .catch(console.error);
   }, []);

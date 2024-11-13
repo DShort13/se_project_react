@@ -5,6 +5,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [weather, setWeather] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -14,9 +15,14 @@ function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
     setImageUrl(e.target.value);
   };
 
+  const handleWeatherChange = (e) => {
+    setWeather(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl }, resetForm);
+    console.log(e);
+    onAddItem({ name, imageUrl, weather }, resetForm);
   };
 
   const resetForm = () => {
@@ -49,7 +55,6 @@ function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
             placeholder="Name"
             required
             minLength="1"
-            maxLength="30"
             onChange={handleNameChange}
           />
         </label>
@@ -63,7 +68,6 @@ function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
             placeholder="Image URL"
             required
             minLength="1"
-            maxLength="30"
             onChange={handleUrlChange}
           />
         </label>
@@ -76,6 +80,7 @@ function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
               className="modal__input_type_radio"
               name="weatherType"
               value="hot"
+              onChange={handleWeatherChange}
             />
             <span>Hot</span>
           </label>
@@ -89,6 +94,7 @@ function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
               className="modal__input_type_radio"
               name="weatherType"
               value="warm"
+              onChange={handleWeatherChange}
             />
             <span>Warm</span>
           </label>
@@ -102,6 +108,7 @@ function AddItemModal({ closeActiveModal, onAddItem, isOpen }) {
               className="modal__input_type_radio"
               name="weatherType"
               value="cold"
+              onChange={handleWeatherChange}
             />
             <span>Cold</span>
           </label>
