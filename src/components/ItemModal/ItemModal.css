@@ -34,6 +34,10 @@
   background: none;
 }
 
+.modal__delete-btn:hover {
+  cursor: pointer;
+}
+
 .modal__weather {
   margin: 0;
 }

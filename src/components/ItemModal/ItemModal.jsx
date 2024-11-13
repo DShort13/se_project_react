@@ -1,6 +1,6 @@
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, onClose, card }) {
+function ItemModal({ activeModal, onClose, card, onDeleteItem }) {
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
@@ -13,7 +13,11 @@ function ItemModal({ activeModal, onClose, card }) {
         <div className="modal__footer">
           <div className="modal__caption">
             <p className="modal__caption">{card.name}</p>
-            <button type="button" className="modal__delete-btn">
+            <button
+              type="button"
+              className="modal__delete-btn"
+              onClick={onDeleteItem}
+            >
               Delete item
             </button>
           </div>
