@@ -101,6 +101,16 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+    },
+    {
+      "name": "f",
+      "imageUrl": "f",
+      "_id": 17
+    },
+    {
+      "name": "Woolly hat",
+      "imageUrl": "https://images.unsplash.com/photo-1576529598261-96e376f6aabb?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "_id": 18
     }
   ]
 }

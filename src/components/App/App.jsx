@@ -10,6 +10,7 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import {
@@ -36,6 +37,10 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleOpenDelete = () => {
+    setActiveModal("confirm");
   };
 
   const handleAddItem = ({ name, imageUrl, weather }) => {
@@ -82,7 +87,6 @@ function App() {
     getClothingItems()
       .then((data) => {
         setClothingItems(data);
-        console.log(data);
       })
       .catch(console.error);
   }, []);
@@ -127,6 +131,11 @@ function App() {
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
+            onClose={closeActiveModal}
+            onOpenDelete={handleOpenDelete}
+          />
+          <ModalWithConfirm
+            activeModal={activeModal}
             onClose={closeActiveModal}
             onDeleteItem={handleDeleteItem}
           />
