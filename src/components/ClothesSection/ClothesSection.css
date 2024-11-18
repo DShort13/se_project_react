@@ -11,6 +11,10 @@
   margin: 0;
 }
 
+.clothes-section__btn:hover {
+  cursor: pointer;
+}
+
 .clothes-section__list {
   display: flex;
   flex-wrap: wrap;
