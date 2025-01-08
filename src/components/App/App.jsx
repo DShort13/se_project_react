@@ -86,7 +86,7 @@ function App() {
   useEffect(() => {
     getClothingItems()
       .then((data) => {
-        setClothingItems(data);
+        setClothingItems(data.data);
       })
       .catch(console.error);
   }, []);
