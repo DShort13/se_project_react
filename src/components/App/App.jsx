@@ -11,6 +11,7 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import {
@@ -124,6 +125,10 @@ function App() {
           <Footer />
         </div>
         <div>
+          <RegisterModal
+            onClose={closeActiveModal}
+            isOpen={activeModal === "sign-up"}
+          />
           <AddItemModal
             onClose={closeActiveModal}
             isOpen={activeModal === "add-garment"}
