@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:3001";
 
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
@@ -31,4 +31,4 @@ function deleteClothingItems(item) {
   });
 }
 
-export { getClothingItems, addClothingItems, deleteClothingItems };
+export { baseUrl, getClothingItems, addClothingItems, deleteClothingItems };
