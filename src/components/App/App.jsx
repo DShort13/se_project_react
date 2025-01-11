@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
@@ -21,6 +21,7 @@ import {
   deleteClothingItems,
   getClothingItems,
 } from "../../utils/api";
+import { logIn, register } from "../../utils/auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -32,7 +33,35 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogIn = ({ email, password }) => {
+    if (!email || !password) {
+      return;
+    }
+
+    logIn(email, password)
+      .then((data) => {
+        if (data.jwt) {
+          setCurrentUser(data.user);
+          setIsLoggedIn(true);
+          navigate("/profile");
+          closeActiveModal();
+        }
+      })
+      .catch(console.error);
+  };
+
+  const handleRegistration = (data) => {
+    register(data)
+      .then(() => {
+        handleLogIn({ email: data.email, password: data.password });
+      })
+      .catch(console.error);
+  };
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -133,6 +162,7 @@ function App() {
           <RegisterModal
             onClose={closeActiveModal}
             isOpen={activeModal === "signup"}
+            onRegister={handleRegistration}
           />
           <LoginModal
             onClose={closeActiveModal}

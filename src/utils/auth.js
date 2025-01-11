@@ -19,7 +19,7 @@ const register = (email, password, name, avatar) => {
   });
 };
 
-const login = (email, password) => {
+const logIn = (email, password) => {
   return request(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
@@ -29,4 +29,4 @@ const login = (email, password) => {
   });
 };
 
-export { register, login };
+export { register, logIn };
