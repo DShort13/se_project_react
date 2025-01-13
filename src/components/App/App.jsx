@@ -135,9 +135,9 @@ function App() {
     }
 
     getUserInfo(jwt)
-      .then(({ email, password }) => {
+      .then((user) => {
         setIsLoggedIn(true);
-        setCurrentUser({ email, password });
+        setCurrentUser(user);
       })
       .catch(console.error);
   }, []);

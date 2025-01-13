@@ -22,10 +22,13 @@ function getUserInfo(token) {
   });
 }
 
-function addClothingItems({ name, imageUrl, weather }) {
+function addClothingItems({ name, imageUrl, weather }, token) {
   return request(`${baseUrl}/items`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({
       name,
       imageUrl,
@@ -34,10 +37,13 @@ function addClothingItems({ name, imageUrl, weather }) {
   });
 }
 
-function deleteClothingItems(item) {
+function deleteClothingItems(item, token) {
   return request(`${baseUrl}/items/${item._id}`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 }
 
