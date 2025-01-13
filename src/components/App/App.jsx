@@ -22,6 +22,7 @@ import {
   getClothingItems,
 } from "../../utils/api";
 import { logIn, register } from "../../utils/auth";
+import { setToken, getToken } from "../../utils/token";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -46,6 +47,7 @@ function App() {
     logIn(email, password)
       .then((data) => {
         if (data.jwt) {
+          setToken(data.jwt);
           setCurrentUser(data.user);
           setIsLoggedIn(true);
           navigate("/profile");
