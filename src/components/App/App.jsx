@@ -20,6 +20,7 @@ import {
   addClothingItems,
   deleteClothingItems,
   getClothingItems,
+  getUserInfo,
 } from "../../utils/api";
 import { logIn, register } from "../../utils/auth";
 import { setToken, getToken } from "../../utils/token";
@@ -122,6 +123,21 @@ function App() {
     getClothingItems()
       .then((data) => {
         setClothingItems(data.data);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const jwt = getToken();
+
+    if (!jwt) {
+      return;
+    }
+
+    getUserInfo(jwt)
+      .then(({ email, password }) => {
+        setIsLoggedIn(true);
+        setCurrentUser({ email, password });
       })
       .catch(console.error);
   }, []);
