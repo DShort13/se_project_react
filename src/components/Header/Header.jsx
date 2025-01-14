@@ -1,10 +1,19 @@
+import { useContext } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 
-function Header({ onCardClick, weatherData }) {
+function Header({
+  onCardClick,
+  weatherData,
+  isLoggedIn,
+  handleRegisterModal,
+  handleLogInModal,
+}) {
+  const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -19,7 +28,51 @@ function Header({ onCardClick, weatherData }) {
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
-      <button
+      {isLoggedIn ? (
+        <>
+          <button
+            onClick={onCardClick}
+            type="button"
+            className="header__add-clothes-btn"
+          >
+            + Add clothes
+          </button>
+          <Link to="/profile" className="header__profile-link">
+            <div className="header__user-container">
+              <p className="header__username">{currentUser.name}</p>
+              {currentUser ? (
+                <img
+                  src={currentUser.avatar}
+                  alt={currentUser.name || "User Avatar"}
+                  className="header__avatar"
+                />
+              ) : (
+                <div className="header__avatar_placeholder">
+                  {currentUser.name.charAt(0).toUpperCase()}
+                </div>
+              )}
+            </div>
+          </Link>
+        </>
+      ) : (
+        <div className="header__auth-buttons">
+          <button
+            onClick={handleRegisterModal}
+            type="button"
+            className="header__signup"
+          >
+            Sign Up
+          </button>
+          <button
+            onClick={handleLogInModal}
+            type="button"
+            className="header__login"
+          >
+            Log In
+          </button>
+        </div>
+      )}
+      {/* <button
         onClick={onCardClick}
         type="button"
         className="header__add-clothes-btn"
@@ -31,7 +84,7 @@ function Header({ onCardClick, weatherData }) {
           <p className="header__username">Terrence Tegegne</p>
           <img src={avatar} alt="Terrence Tegegne" className="header__avatar" />
         </div>
-      </Link>
+      </Link> */}
     </header>
   );
 }

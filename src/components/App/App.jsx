@@ -67,6 +67,14 @@ function App() {
       .catch(console.error);
   };
 
+  const handleRegisterModal = () => {
+    setActiveModal("signup");
+  };
+
+  const handleLogInModal = () => {
+    setActiveModal("login");
+  };
+
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
@@ -150,7 +158,13 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <div className="page__content">
-            <Header onCardClick={handleAddClick} weatherData={weatherData} />
+            <Header
+              onCardClick={handleAddClick}
+              weatherData={weatherData}
+              isLoggedIn={isLoggedIn}
+              handleRegisterModal={handleRegisterModal}
+              handleLogInModal={handleLogInModal}
+            />
             <Routes>
               <Route
                 path="/"
@@ -183,10 +197,13 @@ function App() {
               onClose={closeActiveModal}
               isOpen={activeModal === "signup"}
               onRegister={handleRegistration}
+              handleLogInModal={handleLogInModal}
             />
             <LoginModal
               onClose={closeActiveModal}
-              isOpen={activeModal === "signin"}
+              isOpen={activeModal === "login"}
+              onLogIn={handleLogIn}
+              handleRegisterModal={handleRegisterModal}
             />
             <AddItemModal
               onClose={closeActiveModal}

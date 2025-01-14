@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { Link } from "react-router-dom";
 
-function RegisterModal({ onClose, onRegister, isOpen }) {
+function RegisterModal({ onClose, handleLogInModal, onRegister, isOpen }) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -11,29 +11,42 @@ function RegisterModal({ onClose, onRegister, isOpen }) {
     avatar: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleAvatarChange = (e) => {
+    setAvatar(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onRegister(
       {
-        email: data.email,
-        password: data.password,
-        name: data.name,
-        avatar: data.avatar,
+        email,
+        password,
+        name,
+        avatar,
       },
       resetForm
     );
   };
 
   const resetForm = () => {
-    setData({ email: "", password: "", name: "", avatar: "" });
+    setEmail(""), setPassword(""), setName(""), setAvatar("");
   };
 
   useEffect(() => {
@@ -45,7 +58,7 @@ function RegisterModal({ onClose, onRegister, isOpen }) {
   return (
     <div>
       <ModalWithForm
-        title="Sign up"
+        title="Sign Up"
         buttonText="Sign Up"
         onClose={onClose}
         isOpen={isOpen}
@@ -56,13 +69,13 @@ function RegisterModal({ onClose, onRegister, isOpen }) {
           <input
             id="register-email"
             name="register-email"
-            value={data.email}
+            value={email}
             type="email"
             className="modal__input"
             placeholder="Email"
             required
             minLength="1"
-            onChange={handleChange}
+            onChange={handleEmailChange}
           />
         </label>
         <label htmlFor="register-password" className="modal__label">
@@ -70,13 +83,13 @@ function RegisterModal({ onClose, onRegister, isOpen }) {
           <input
             id="register-password"
             name="register-password"
-            value={data.password}
+            value={password}
             type="password"
             className="modal__input"
             placeholder="Password"
             required
             minLength="1"
-            onChange={handleChange}
+            onChange={handlePasswordChange}
           />
         </label>
         <label htmlFor="name" className="modal__label">
@@ -84,13 +97,13 @@ function RegisterModal({ onClose, onRegister, isOpen }) {
           <input
             id="name"
             name="name"
-            value={data.name}
+            value={name}
             type="text"
             className="modal__input"
             placeholder="Name"
             required
             minLength="1"
-            onChange={handleChange}
+            onChange={handleNameChange}
           />
         </label>
         <label htmlFor="avatar" className="modal__label">
@@ -98,13 +111,13 @@ function RegisterModal({ onClose, onRegister, isOpen }) {
           <input
             id="avatar"
             name="avatar"
-            value={data.avatar}
+            value={avatar}
             type="text"
             className="modal__input"
             placeholder="Avatar URL"
             required
             minLength="1"
-            onChange={handleChange}
+            onChange={handleAvatarChange}
           />
         </label>
         <div className="register__button-container">
@@ -113,7 +126,11 @@ function RegisterModal({ onClose, onRegister, isOpen }) {
           </button>
         </div>
         <div className="register__signin">
-          <Link to="login" className="register__login-link">
+          <Link
+            to="login"
+            onClick={handleLogInModal}
+            className="register__login-link"
+          >
             or Log In
           </Link>
         </div>

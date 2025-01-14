@@ -1,6 +1,7 @@
 import { baseUrl } from "./api";
 
 function checkResponse(res) {
+  console.log(res);
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
@@ -8,7 +9,7 @@ function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-const register = (email, password, name, avatar) => {
+const register = ({ email, password, name, avatar }) => {
   return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
@@ -19,7 +20,7 @@ const register = (email, password, name, avatar) => {
   });
 };
 
-const logIn = (email, password) => {
+const logIn = ({ email, password }) => {
   return request(`${baseUrl}/signin`, {
     method: "POST",
     headers: {

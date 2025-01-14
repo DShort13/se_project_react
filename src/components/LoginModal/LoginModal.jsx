@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { Link } from "react-router-dom";
 
-function LoginModal({ onClose, onLogin, isOpen }) {
+function LoginModal({ onClose, onLogIn, isOpen, handleRegisterModal }) {
   const [data, setData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -21,7 +21,7 @@ function LoginModal({ onClose, onLogin, isOpen }) {
       return;
     }
 
-    onLogin({ email: data.email, password: data.password }, resetForm);
+    onLogIn({ email: data.email, password: data.password }, resetForm);
   };
 
   const resetForm = () => {
@@ -37,8 +37,8 @@ function LoginModal({ onClose, onLogin, isOpen }) {
   return (
     <div>
       <ModalWithForm
-        title="Log in"
-        buttonText="Log in"
+        title="Log In"
+        buttonText="Log In"
         onClose={onClose}
         isOpen={isOpen}
         onSubmit={handleSubmit}
@@ -77,7 +77,11 @@ function LoginModal({ onClose, onLogin, isOpen }) {
           </button>
         </div>
         <div className="login__signup">
-          <Link to="login" className="login__signup-link">
+          <Link
+            to="register"
+            onClick={handleRegisterModal}
+            className="login__signup-link"
+          >
             or Sign Up
           </Link>
         </div>
