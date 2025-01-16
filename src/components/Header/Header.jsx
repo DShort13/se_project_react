@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
 
 function Header({
   onCardClick,

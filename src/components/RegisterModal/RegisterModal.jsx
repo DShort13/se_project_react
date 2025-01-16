@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { Link } from "react-router-dom";
 
 function RegisterModal({ onClose, handleLogInModal, onRegister, isOpen }) {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-    name: "",
-    avatar: "",
-  });
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -121,18 +113,18 @@ function RegisterModal({ onClose, handleLogInModal, onRegister, isOpen }) {
           />
         </label>
         <div className="register__button-container">
-          <button type="button" className="register__link">
+          {/* <button type="button" className="register__link">
             Sign Up
-          </button>
+          </button> */}
         </div>
         <div className="register__signin">
-          <Link
-            to="login"
+          <button
+            type="button"
             onClick={handleLogInModal}
             className="register__login-link"
           >
             or Log In
-          </Link>
+          </button>
         </div>
       </ModalWithForm>
     </div>

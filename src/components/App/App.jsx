@@ -41,32 +41,6 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleLogIn = ({ email, password }) => {
-    if (!email || !password) {
-      return;
-    }
-
-    logIn(email, password)
-      .then((data) => {
-        if (data.jwt) {
-          setToken(data.jwt);
-          setCurrentUser(data.user);
-          setIsLoggedIn(true);
-          navigate("/profile");
-          closeActiveModal();
-        }
-      })
-      .catch(console.error);
-  };
-
-  const handleRegistration = (data) => {
-    register(data)
-      .then(() => {
-        handleLogIn({ email: data.email, password: data.password });
-      })
-      .catch(console.error);
-  };
-
   const handleRegisterModal = () => {
     setActiveModal("signup");
   };
@@ -88,10 +62,45 @@ function App() {
     setActiveModal("confirm");
   };
 
-  const handleAddItem = ({ name, imageUrl, weather }) => {
-    addClothingItems({ name, imageUrl, weather })
+  const handleLogIn = ({ email, password }) => {
+    if (!email || !password) {
+      return;
+    }
+
+    logIn({ email, password })
+      .then((res) => {
+        if (!res.token) throw new Error("No token found");
+        setToken(res.token);
+        return getUserInfo(res.token);
+      })
       .then((data) => {
-        setClothingItems([data, ...clothingItems]);
+        console.log(data);
+        setCurrentUser(data.user);
+        setIsLoggedIn(true);
+        navigate("/profile");
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleRegistration = (data) => {
+    console.log(data);
+    register(data)
+      .then(() => {
+        handleLogIn({ email: data.email, password: data.password });
+      })
+      .catch(console.error);
+  };
+
+  const handleAddItem = ({ name, imageUrl, weather }) => {
+    const token = getToken();
+    if (!token) {
+      console.error("No token found, user might not be authenticated");
+      return;
+    }
+    addClothingItems({ name, imageUrl, weather, token })
+      .then((item) => {
+        setClothingItems([item.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
@@ -140,6 +149,7 @@ function App() {
     const jwt = getToken();
 
     if (!jwt) {
+      console.error("No token found local storage");
       return;
     }
 

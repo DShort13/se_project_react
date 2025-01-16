@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { Link } from "react-router-dom";
 
 function LoginModal({ onClose, onLogIn, isOpen, handleRegisterModal }) {
   const [data, setData] = useState({ email: "", password: "" });
@@ -72,18 +71,18 @@ function LoginModal({ onClose, onLogIn, isOpen, handleRegisterModal }) {
           />
         </label>
         <div className="login__button-container">
-          <button type="button" className="login__link">
+          {/* <button type="button" className="login__link">
             Log In
-          </button>
+          </button> */}
         </div>
         <div className="login__signup">
-          <Link
-            to="register"
+          <button
+            type="button"
             onClick={handleRegisterModal}
             className="login__signup-link"
           >
             or Sign Up
-          </Link>
+          </button>
         </div>
       </ModalWithForm>
     </div>
