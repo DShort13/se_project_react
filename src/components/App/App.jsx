@@ -140,6 +140,7 @@ function App() {
   useEffect(() => {
     getClothingItems()
       .then((data) => {
+        console.log(data.data);
         setClothingItems(data.data);
       })
       .catch(console.error);
