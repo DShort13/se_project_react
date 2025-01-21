@@ -21,10 +21,10 @@ import {
   addClothingItems,
   deleteClothingItems,
   getClothingItems,
-  getUserInfo,
 } from "../../utils/api";
-import { logIn, register } from "../../utils/auth";
+import { logIn, register, getUserInfo, editUserInfo } from "../../utils/auth";
 import { setToken, getToken } from "../../utils/token";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -47,6 +47,10 @@ function App() {
 
   const handleLogInModal = () => {
     setActiveModal("login");
+  };
+
+  const handleEditProfileModal = () => {
+    setActiveModal("edit");
   };
 
   const handleAddClick = () => {
@@ -100,10 +104,21 @@ function App() {
     }
     addClothingItems({ name, imageUrl, weather, token })
       .then((item) => {
-        setClothingItems([item.data, ...clothingItems]);
+        // setClothingItems([item.data, ...clothingItems]);
+        setClothingItems((clothingItems) => [item.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
+  };
+
+  const handleEditUser = ({ name, avatar }) => {
+    const token = getToken();
+    editUserInfo({ name, avatar }, token)
+      .then((newData) => {
+        console.log(newData);
+        setCurrentUser(newData);
+      })
+      .catch((err) => console.error("Edit profile error:", err));
   };
 
   const handleDeleteItem = () => {
@@ -196,6 +211,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
+                      handleEditProfileModal={handleEditProfileModal}
                     />
                   </ProtectedRoute>
                 }
@@ -215,6 +231,11 @@ function App() {
               isOpen={activeModal === "login"}
               onLogIn={handleLogIn}
               handleRegisterModal={handleRegisterModal}
+            />
+            <EditProfileModal
+              onClose={closeActiveModal}
+              isOpen={activeModal === "edit"}
+              onEdit={handleEditUser}
             />
             <AddItemModal
               onClose={closeActiveModal}

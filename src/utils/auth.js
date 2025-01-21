@@ -30,4 +30,25 @@ const logIn = ({ email, password }) => {
   });
 };
 
-export { register, logIn };
+function getUserInfo(token) {
+  return request(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+const editUserInfo = ({ name, avatar }, token) => {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  });
+};
+
+export { register, logIn, getUserInfo, editUserInfo };

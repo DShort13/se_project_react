@@ -12,16 +12,6 @@ function getClothingItems() {
   return request(`${baseUrl}/items`);
 }
 
-function getUserInfo(token) {
-  return request(`${baseUrl}/users/me`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  });
-}
-
 function addClothingItems({ name, imageUrl, weather, token }) {
   return request(`${baseUrl}/items`, {
     method: "POST",
@@ -43,10 +33,4 @@ function deleteClothingItems(item, token) {
   });
 }
 
-export {
-  baseUrl,
-  getClothingItems,
-  getUserInfo,
-  addClothingItems,
-  deleteClothingItems,
-};
+export { baseUrl, getClothingItems, addClothingItems, deleteClothingItems };
