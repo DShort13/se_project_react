@@ -6,7 +6,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import logo from "../../assets/logo.svg";
 
 function Header({
-  onCardClick,
+  handleAddClick,
   weatherData,
   isLoggedIn,
   handleRegisterModal,
@@ -30,7 +30,7 @@ function Header({
       {isLoggedIn ? (
         <>
           <button
-            onClick={onCardClick}
+            onClick={handleAddClick}
             type="button"
             className="header__add-clothes-btn"
           >

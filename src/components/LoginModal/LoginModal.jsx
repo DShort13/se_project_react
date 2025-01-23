@@ -5,11 +5,25 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function LoginModal({ onClose, onLogIn, isOpen, handleRegisterModal }) {
   const [data, setData] = useState({ email: "", password: "" });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
+
+  const handleEmailChange = (e) => {
     setData((prevData) => ({
       ...prevData,
-      [name]: value,
+      email: e.target.value,
+    }));
+  };
+
+  const handlePasswordChange = (e) => {
+    setData((prevData) => ({
+      ...prevData,
+      password: e.target.value,
     }));
   };
 
@@ -53,7 +67,7 @@ function LoginModal({ onClose, onLogIn, isOpen, handleRegisterModal }) {
             placeholder="Email"
             required
             minLength="1"
-            onChange={handleChange}
+            onChange={handleEmailChange}
           />
         </label>
         <label htmlFor="login-password" className="modal__label">
@@ -67,7 +81,7 @@ function LoginModal({ onClose, onLogIn, isOpen, handleRegisterModal }) {
             placeholder="Password"
             required
             minLength="1"
-            onChange={handleChange}
+            onChange={handlePasswordChange}
           />
         </label>
         <div className="login__button-container">

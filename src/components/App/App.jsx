@@ -13,6 +13,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
@@ -23,8 +24,7 @@ import {
   getClothingItems,
 } from "../../utils/api";
 import { logIn, register, getUserInfo, editUserInfo } from "../../utils/auth";
-import { setToken, getToken } from "../../utils/token";
-import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import { setToken } from "../../utils/token";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -66,27 +66,11 @@ function App() {
     setActiveModal("confirm");
   };
 
-  const handleLogIn = ({ email, password }) => {
-    if (!email || !password) {
-      return;
-    }
-
-    logIn({ email, password })
-      .then((res) => {
-        if (!res.token) throw new Error("No token found");
-        setToken(res.token);
-        return getUserInfo(res.token);
-      })
-      .then((data) => {
-        console.log(data);
-        setCurrentUser(data.user);
-        setIsLoggedIn(true);
-        navigate("/profile");
-        closeActiveModal();
-      })
-      .catch(console.error);
+  const closeActiveModal = () => {
+    setActiveModal("");
   };
 
+  // New sign up
   const handleRegistration = (data) => {
     console.log(data);
     register(data)
@@ -96,23 +80,33 @@ function App() {
       .catch(console.error);
   };
 
-  const handleAddItem = ({ name, imageUrl, weather }) => {
-    const token = getToken();
-    if (!token) {
-      console.error("No token found, user might not be authenticated");
+  // New log in
+  const handleLogIn = ({ email, password }) => {
+    if (!email || !password) {
       return;
     }
-    addClothingItems({ name, imageUrl, weather, token })
-      .then((item) => {
-        // setClothingItems([item.data, ...clothingItems]);
-        setClothingItems((clothingItems) => [item.data, ...clothingItems]);
-        closeActiveModal();
+
+    logIn({ email, password })
+      .then((data) => {
+        if (data.token && data.user) {
+          console.log(data);
+          setToken(data.token);
+          setCurrentUser(data.user);
+          setIsLoggedIn(true);
+          navigate("/profile");
+          closeActiveModal();
+        } else {
+          console.error("No JWT token found in the response.");
+        }
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Error logging in: ", err);
+      });
   };
 
+  // Edit profile changes
   const handleEditUser = ({ name, avatar }) => {
-    const token = getToken();
+    const token = localStorage.getItem("jwt");
     editUserInfo({ name, avatar }, token)
       .then((newData) => {
         console.log(newData);
@@ -121,6 +115,23 @@ function App() {
       .catch((err) => console.error("Edit profile error:", err));
   };
 
+  // Add items
+  const handleAddItem = (newItem) => {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      console.error("No token found, user might not be authenticated");
+      return;
+    }
+    addClothingItems(newItem, token)
+      .then((item) => {
+        // setClothingItems([item.data, ...clothingItems]);
+        setClothingItems((clothingItems) => [item.data, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  // Delete items
   const handleDeleteItem = () => {
     deleteClothingItems(selectedCard)
       .then(() => {
@@ -131,10 +142,6 @@ function App() {
         closeActiveModal();
       })
       .catch(console.error);
-  };
-
-  const closeActiveModal = () => {
-    setActiveModal("");
   };
 
   const handleToggleSwitchChange = () => {
@@ -155,6 +162,7 @@ function App() {
   useEffect(() => {
     getClothingItems()
       .then((data) => {
+        console.log(data);
         console.log(data.data);
         setClothingItems(data.data);
       })
@@ -162,14 +170,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const jwt = getToken();
+    const token = localStorage.getItem("jwt");
 
-    if (!jwt) {
+    if (!token) {
       console.error("No token found local storage");
       return;
     }
 
-    getUserInfo(jwt)
+    getUserInfo(token)
       .then((user) => {
         setIsLoggedIn(true);
         setCurrentUser(user);
@@ -185,7 +193,7 @@ function App() {
         >
           <div className="page__content">
             <Header
-              onCardClick={handleAddClick}
+              handleAddClick={handleAddClick}
               weatherData={weatherData}
               isLoggedIn={isLoggedIn}
               handleRegisterModal={handleRegisterModal}

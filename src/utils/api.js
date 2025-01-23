@@ -8,18 +8,22 @@ function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-function getClothingItems() {
-  return request(`${baseUrl}/items`);
-}
+const getClothingItems = () => {
+  return request(`${baseUrl}/items`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
-function addClothingItems({ name, imageUrl, weather, token }) {
+function addClothingItems(newItem, token) {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name, imageUrl, weather }),
+    body: JSON.stringify(newItem),
   });
 }
 

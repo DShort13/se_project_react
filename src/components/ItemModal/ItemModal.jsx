@@ -5,7 +5,7 @@ import "./ItemModal.css";
 function ItemModal({ activeModal, onClose, card, onOpenDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const isOwn = card.owner === currentUser?._id;
+  const isOwner = currentUser && currentUser?._id === card?.owner;
 
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
@@ -19,7 +19,7 @@ function ItemModal({ activeModal, onClose, card, onOpenDelete }) {
         <div className="modal__footer">
           <div className="modal__caption">
             <p className="modal__caption">{card.name}</p>
-            {isOwn && (
+            {isOwner && (
               <button
                 type="button"
                 className="modal__delete-btn"

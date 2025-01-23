@@ -6,6 +6,14 @@ import ItemCard from "../ItemCard/ItemCard";
 function ClothesSection({ onCardClick, clothingItems, handleAddClick }) {
   const currentUser = useContext(CurrentUserContext);
 
+  const userItems = clothingItems.filter((item) => {
+    console.log(item);
+    item.owner?._id === currentUser?._id;
+  });
+  debugger;
+  console.log("Filtered user items: ", userItems);
+  console.log({ currentUser });
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__text">
@@ -19,14 +27,13 @@ function ClothesSection({ onCardClick, clothingItems, handleAddClick }) {
         </button>
       </div>
       <ul className="clothes-section__list">
-        {clothingItems.map((item) => {
-          const isOwner = item.owner === currentUser._id;
-          return (
-            isOwner && (
-              <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-            )
-          );
-        })}
+        {userItems.length > 0 ? (
+          userItems.map((item) => {
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />;
+          })
+        ) : (
+          <p>No clothing items found</p>
+        )}
       </ul>
     </div>
   );

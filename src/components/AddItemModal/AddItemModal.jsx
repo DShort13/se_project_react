@@ -80,6 +80,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
               className="modal__input_type_radio"
               name="weatherType"
               value="hot"
+              checked={weather === "hot"}
               onChange={handleWeatherChange}
             />
             <span>Hot</span>
@@ -94,6 +95,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
               className="modal__input_type_radio"
               name="weatherType"
               value="warm"
+              checked={weather === "warm"}
               onChange={handleWeatherChange}
             />
             <span>Warm</span>
@@ -108,6 +110,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
               className="modal__input_type_radio"
               name="weatherType"
               value="cold"
+              checked={weather === "cold"}
               onChange={handleWeatherChange}
             />
             <span>Cold</span>
