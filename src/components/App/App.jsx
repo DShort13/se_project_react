@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
@@ -24,7 +24,7 @@ import {
   getClothingItems,
 } from "../../utils/api";
 import { logIn, register, getUserInfo, editUserInfo } from "../../utils/auth";
-import { setToken } from "../../utils/token";
+import { getToken, setToken } from "../../utils/token";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -40,6 +40,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleRegisterModal = () => {
     setActiveModal("signup");
@@ -85,19 +86,20 @@ function App() {
     if (!email || !password) {
       return;
     }
-
     logIn({ email, password })
       .then((data) => {
-        if (data.token && data.user) {
-          console.log(data);
-          setToken(data.token);
-          setCurrentUser(data.user);
-          setIsLoggedIn(true);
-          navigate("/profile");
-          closeActiveModal();
-        } else {
-          console.error("No JWT token found in the response.");
-        }
+        if (!data.token) console.error("No JWT token found in the response.");
+        setToken(data.token);
+        return getUserInfo(data.token);
+      })
+      .then((user) => {
+        setCurrentUser(user);
+        console.log(user);
+        setIsLoggedIn(true);
+
+        const redirectPath = location.state?.from?.pathname || "/profile";
+        navigate(redirectPath);
+        closeActiveModal();
       })
       .catch((err) => {
         console.error("Error logging in: ", err);
@@ -169,15 +171,16 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Check if there is a jwt token
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
+    const jwt = getToken();
 
-    if (!token) {
+    if (!jwt) {
       console.error("No token found local storage");
       return;
     }
 
-    getUserInfo(token)
+    getUserInfo(jwt)
       .then((user) => {
         setIsLoggedIn(true);
         setCurrentUser(user);

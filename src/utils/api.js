@@ -16,7 +16,7 @@ const getClothingItems = () => {
   });
 };
 
-function addClothingItems(newItem, token) {
+const addClothingItems = (newItem, token) => {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -25,9 +25,9 @@ function addClothingItems(newItem, token) {
     },
     body: JSON.stringify(newItem),
   });
-}
+};
 
-function deleteClothingItems(item, token) {
+const deleteClothingItems = (item, token) => {
   return request(`${baseUrl}/items/${item._id}`, {
     method: "DELETE",
     headers: {
@@ -35,6 +35,6 @@ function deleteClothingItems(item, token) {
       authorization: `Bearer ${token}`,
     },
   });
-}
+};
 
 export { baseUrl, getClothingItems, addClothingItems, deleteClothingItems };

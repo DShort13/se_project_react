@@ -30,15 +30,19 @@ const logIn = ({ email, password }) => {
   });
 };
 
-function getUserInfo(token) {
+// getContent accepts the token as an argument.
+const getUserInfo = (token) => {
+  // Send a GET request to /users/me
   return request(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      // Specify an authorization header with an appropriately
+      // formatted value.
       authorization: `Bearer ${token}`,
     },
   });
-}
+};
 
 const editUserInfo = ({ name, avatar }, token) => {
   return request(`${baseUrl}/users/me`, {

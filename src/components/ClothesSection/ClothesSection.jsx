@@ -10,7 +10,7 @@ function ClothesSection({ onCardClick, clothingItems, handleAddClick }) {
     console.log(item);
     item.owner?._id === currentUser?._id;
   });
-  debugger;
+  // debugger;
   console.log("Filtered user items: ", userItems);
   console.log({ currentUser });
 
