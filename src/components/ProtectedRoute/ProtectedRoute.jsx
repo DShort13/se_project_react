@@ -1,8 +1,16 @@
 import { Navigate, useLocation } from "react-router-dom";
 
-function ProtectedRoute({ isLoggedIn, children, anonymous = false }) {
+function ProtectedRoute({
+  isLoggedIn,
+  isLoggedInLoading,
+  children,
+  anonymous = false,
+}) {
   const location = useLocation();
   const from = location.state?.from || "/";
+
+  // If it's still loading, do nothing
+  if (isLoggedInLoading) return null;
 
   // If the user is logged in we redirect them away from our
   // anonymous routes.

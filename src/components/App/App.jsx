@@ -38,6 +38,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedInLoading, setIsLoggedInLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -189,10 +190,15 @@ function App() {
 
     getUserInfo(jwt)
       .then((user) => {
+        setIsLoggedInLoading(false);
         setIsLoggedIn(true);
         setCurrentUser(user);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Invalid token: ", err);
+        removeToken();
+        setIsLoggedInLoading(false);
+      });
   }, []);
 
   return (
@@ -224,7 +230,10 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <ProtectedRoute
+                    isLoggedIn={isLoggedIn}
+                    isLoggedInLoading={isLoggedInLoading}
+                  >
                     <Profile
                       handleAddClick={handleAddClick}
                       onCardClick={handleCardClick}
