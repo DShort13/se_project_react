@@ -24,7 +24,7 @@ import {
   getClothingItems,
 } from "../../utils/api";
 import { logIn, register, getUserInfo, editUserInfo } from "../../utils/auth";
-import { getToken, setToken } from "../../utils/token";
+import { getToken, removeToken, setToken } from "../../utils/token";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -71,7 +71,7 @@ function App() {
     setActiveModal("");
   };
 
-  // New sign up
+  // Handle sign up
   const handleRegistration = (data) => {
     console.log(data);
     register(data)
@@ -81,7 +81,7 @@ function App() {
       .catch(console.error);
   };
 
-  // New log in
+  // Handle log in
   const handleLogIn = ({ email, password }) => {
     if (!email || !password) {
       return;
@@ -104,6 +104,13 @@ function App() {
       .catch((err) => {
         console.error("Error logging in: ", err);
       });
+  };
+
+  // Handle log out
+  const handleLogOut = () => {
+    removeToken();
+    navigate("/");
+    setIsLoggedIn(false);
   };
 
   // Edit profile changes
@@ -223,6 +230,7 @@ function App() {
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleEditProfileModal={handleEditProfileModal}
+                      handleLogOut={handleLogOut}
                     />
                   </ProtectedRoute>
                 }
