@@ -136,7 +136,7 @@ function App() {
       .then((item) => {
         // setClothingItems([item.data, ...clothingItems]);
         // console.log(item);
-        setClothingItems((clothingItems) => [item, ...clothingItems]);
+        setClothingItems((clothingItems) => [item.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
