@@ -95,7 +95,7 @@ function App() {
       })
       .then((user) => {
         setCurrentUser(user);
-        console.log(user);
+        // console.log(user);
         setIsLoggedIn(true);
 
         const redirectPath = location.state?.from?.pathname || "/profile";
@@ -119,23 +119,24 @@ function App() {
     const token = localStorage.getItem("jwt");
     editUserInfo({ name, avatar }, token)
       .then((newData) => {
-        console.log(newData);
+        // console.log(newData);
         setCurrentUser(newData);
       })
       .catch((err) => console.error("Edit profile error:", err));
   };
 
   // Add items
-  const handleAddItem = (newItem) => {
-    const token = localStorage.getItem("jwt");
+  const handleAddItem = ({ name, imageUrl, weather }) => {
+    const token = getToken();
     if (!token) {
       console.error("No token found, user might not be authenticated");
       return;
     }
-    addClothingItems(newItem, token)
+    addClothingItems({ name, imageUrl, weather }, token)
       .then((item) => {
         // setClothingItems([item.data, ...clothingItems]);
-        setClothingItems((clothingItems) => [item.data, ...clothingItems]);
+        // console.log(item);
+        setClothingItems((clothingItems) => [item, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
@@ -172,8 +173,8 @@ function App() {
   useEffect(() => {
     getClothingItems()
       .then((data) => {
-        console.log(data);
-        console.log(data.data);
+        // console.log(data);
+        // console.log(data.data);
         setClothingItems(data.data);
       })
       .catch(console.error);

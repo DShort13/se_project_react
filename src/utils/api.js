@@ -16,14 +16,14 @@ const getClothingItems = () => {
   });
 };
 
-const addClothingItems = (newItem, token) => {
+const addClothingItems = ({ name, imageUrl, weather }, token) => {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(newItem),
+    body: JSON.stringify({ name, imageUrl, weather }),
   });
 };
 

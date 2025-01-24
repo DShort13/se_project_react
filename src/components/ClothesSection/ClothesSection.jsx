@@ -7,12 +7,12 @@ function ClothesSection({ onCardClick, clothingItems, handleAddClick }) {
   const currentUser = useContext(CurrentUserContext);
 
   const userItems = clothingItems.filter((item) => {
-    console.log(item);
-    item.owner?._id === currentUser?._id;
+    item.owner?._id === currentUser._id;
   });
   // debugger;
   console.log("Filtered user items: ", userItems);
-  console.log({ currentUser });
+  // console.log({ currentUser });
+  // console.log(currentUser);
 
   return (
     <div className="clothes-section">
@@ -29,7 +29,9 @@ function ClothesSection({ onCardClick, clothingItems, handleAddClick }) {
       <ul className="clothes-section__list">
         {userItems.length > 0 ? (
           userItems.map((item) => {
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />;
+            return (
+              <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            );
           })
         ) : (
           <p>No clothing items found</p>
