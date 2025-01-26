@@ -19,9 +19,11 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import {
+  addCardLike,
   addClothingItems,
   deleteClothingItems,
   getClothingItems,
+  removeCardLike,
 } from "../../utils/api";
 import { logIn, register, getUserInfo, editUserInfo } from "../../utils/auth";
 import { getToken, removeToken, setToken } from "../../utils/token";
@@ -134,8 +136,6 @@ function App() {
     }
     addClothingItems({ name, imageUrl, weather }, token)
       .then((item) => {
-        // setClothingItems([item.data, ...clothingItems]);
-        // console.log(item);
         setClothingItems((clothingItems) => [item.data, ...clothingItems]);
         closeActiveModal();
       })
@@ -153,6 +153,27 @@ function App() {
         closeActiveModal();
       })
       .catch(console.error);
+  };
+
+  // Like items
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = getToken();
+
+    !isLiked
+      ? addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
+            );
+          })
+          .catch((err) => console.log(err));
   };
 
   const handleToggleSwitchChange = () => {
@@ -173,8 +194,6 @@ function App() {
   useEffect(() => {
     getClothingItems()
       .then((data) => {
-        // console.log(data);
-        // console.log(data.data);
         setClothingItems(data.data);
       })
       .catch(console.error);
@@ -225,6 +244,7 @@ function App() {
                     weatherTemp={weatherData.temp}
                     onCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />

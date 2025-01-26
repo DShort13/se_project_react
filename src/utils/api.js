@@ -37,4 +37,31 @@ const deleteClothingItems = (item, token) => {
   });
 };
 
-export { baseUrl, getClothingItems, addClothingItems, deleteClothingItems };
+const addCardLike = (id, token) => {
+  return request(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+const removeCardLike = (id, token) => {
+  return request(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export {
+  baseUrl,
+  getClothingItems,
+  addClothingItems,
+  deleteClothingItems,
+  addCardLike,
+  removeCardLike,
+};
