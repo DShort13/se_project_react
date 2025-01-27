@@ -65,6 +65,10 @@
   background-image: url(../../assets/card-heart_liked.svg);
 }
 
+.card__heart-hidden {
+  visibility: hidden;
+}
+
 .card__image {
   width: 325px;
   height: 328px;

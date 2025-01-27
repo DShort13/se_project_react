@@ -11,13 +11,12 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   const handleLike = () => {
     onCardLike({ id: item._id, isLiked });
-    console.log(isLiked);
   };
 
-  const isLiked = item.likes.some((id) => id === currentUser._id);
+  const isLiked = item.likes.some((id) => id === currentUser?._id);
 
   const itemLikeButtonClassName = `card__heart ${
-    !isLiked ? "card__heart-liked" : ""
+    isLiked ? "card__heart-liked" : ""
   }`;
 
   return (
@@ -27,11 +26,13 @@ function ItemCard({ item, onCardClick, onCardLike }) {
           {item.name}
           {/* <span className="card__title_type_background">{item.name}</span> */}
         </h2>
-        <button
-          onClick={handleLike}
-          type="button"
-          className={itemLikeButtonClassName}
-        />
+        {currentUser?._id && (
+          <button
+            onClick={handleLike}
+            type="button"
+            className={itemLikeButtonClassName}
+          />
+        )}
       </div>
       <img
         onClick={handleCardClick}

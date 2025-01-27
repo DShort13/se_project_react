@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
@@ -14,6 +14,13 @@ function ClothesSection({
   const userItems = clothingItems.filter(
     (item) => item.owner?._id === currentUser._id
   );
+
+  console.log("After updating clothingItems:", clothingItems);
+  console.log("After updating clothingItems:", userItems);
+
+  // useEffect(() => {
+  //   console.log("userItems updated in ClothesSection:", userItems);
+  // }, [userItems]);
 
   return (
     <div className="clothes-section">

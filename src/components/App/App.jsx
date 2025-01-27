@@ -97,7 +97,6 @@ function App() {
       })
       .then((user) => {
         setCurrentUser(user);
-        // console.log(user);
         setIsLoggedIn(true);
 
         const redirectPath = location.state?.from?.pathname || "/profile";
@@ -111,9 +110,10 @@ function App() {
 
   // Handle log out
   const handleLogOut = () => {
+    setCurrentUser(null);
+    setIsLoggedIn(false);
     removeToken();
     navigate("/");
-    setIsLoggedIn(false);
   };
 
   // Edit profile changes
@@ -121,8 +121,8 @@ function App() {
     const token = localStorage.getItem("jwt");
     editUserInfo({ name, avatar }, token)
       .then((newData) => {
-        // console.log(newData);
         setCurrentUser(newData);
+        closeActiveModal();
       })
       .catch((err) => console.error("Edit profile error:", err));
   };
@@ -203,22 +203,19 @@ function App() {
   useEffect(() => {
     const jwt = getToken();
 
-    if (!jwt) {
-      console.error("No token found local storage");
-      return;
+    if (jwt) {
+      getUserInfo(jwt)
+        .then((user) => {
+          setCurrentUser(user);
+          setIsLoggedInLoading(false);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error("Invalid token: ", err);
+          removeToken();
+          setIsLoggedInLoading(false);
+        });
     }
-
-    getUserInfo(jwt)
-      .then((user) => {
-        setIsLoggedInLoading(false);
-        setIsLoggedIn(true);
-        setCurrentUser(user);
-      })
-      .catch((err) => {
-        console.error("Invalid token: ", err);
-        removeToken();
-        setIsLoggedInLoading(false);
-      });
   }, []);
 
   return (
