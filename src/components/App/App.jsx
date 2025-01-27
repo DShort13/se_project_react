@@ -261,6 +261,7 @@ function App() {
                       clothingItems={clothingItems}
                       handleEditProfileModal={handleEditProfileModal}
                       handleLogOut={handleLogOut}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }
