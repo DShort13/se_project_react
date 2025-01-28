@@ -143,7 +143,12 @@ function App() {
 
   // Delete items
   const handleDeleteItem = () => {
-    deleteClothingItems(selectedCard)
+    const token = getToken();
+    if (!token) {
+      console.error("No token found, user might not be authenticated");
+      return;
+    }
+    deleteClothingItems(selectedCard, token)
       .then(() => {
         const updatedClothingItems = clothingItems.filter(
           (item) => item._id !== selectedCard._id
