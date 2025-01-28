@@ -30,9 +30,12 @@ It was created using Javascript, CSS, and HTML5.
 
 #### Plans for improvement
 
-- Add more customised pictures for the clothing items
-- Add more clothing items for the user to choose from
+- Add mobile view support
 
 #### Pages link
 
 https://dshort13.github.io/se_project_react/
+
+#### Backend code link
+
+https://github.com/DShort13/se_project_express
