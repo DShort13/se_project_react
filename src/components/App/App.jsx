@@ -215,6 +215,8 @@ function App() {
           removeToken();
           setIsLoggedInLoading(false);
         });
+    } else {
+      setIsLoggedInLoading(false);
     }
   }, []);
 

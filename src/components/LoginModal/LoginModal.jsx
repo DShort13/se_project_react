@@ -5,14 +5,6 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function LoginModal({ onClose, onLogIn, isOpen, handleRegisterModal }) {
   const [data, setData] = useState({ email: "", password: "" });
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
   const handleEmailChange = (e) => {
     setData((prevData) => ({
       ...prevData,
