@@ -10,11 +10,9 @@ function EditProfileModal({ onClose, isOpen, onEdit }) {
   const currentUser = useContext(CurrentUserContext);
 
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value || "");
   };
   const handleAvatarChange = (e) => {
-    console.log(e.target.value);
     setAvatar(e.target.value || "");
   };
 
@@ -22,22 +20,6 @@ function EditProfileModal({ onClose, isOpen, onEdit }) {
     e.preventDefault();
     onEdit({ name, avatar });
   };
-
-  // useEffect(() => {
-  //   // if (!currentUser && !currentUser.name) {
-  //   //   setName("");
-  //   // }
-
-  //   setName(currentUser.name);
-  // }, [currentUser]);
-
-  // useEffect(() => {
-  //   if (!currentUser && !currentUser.avatar) {
-  //     setAvatar("");
-  //   }
-
-  //   setAvatar(currentUser.avatar);
-  // }, [currentUser]);
 
   useEffect(() => {
     if (currentUser && currentUser.name) {

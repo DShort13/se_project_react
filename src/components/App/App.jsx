@@ -76,7 +76,6 @@ function App() {
 
   // Handle sign up
   const handleRegistration = (data) => {
-    console.log(data);
     register(data)
       .then(() => {
         handleLogIn({ email: data.email, password: data.password });

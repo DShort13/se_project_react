@@ -15,13 +15,6 @@ function ClothesSection({
     (item) => item.owner?._id === currentUser._id
   );
 
-  console.log("After updating clothingItems:", clothingItems);
-  console.log("After updating clothingItems:", userItems);
-
-  // useEffect(() => {
-  //   console.log("userItems updated in ClothesSection:", userItems);
-  // }, [userItems]);
-
   return (
     <div className="clothes-section">
       <div className="clothes-section__text">

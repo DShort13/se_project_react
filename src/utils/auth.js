@@ -9,7 +9,6 @@ function request(url, options) {
 }
 
 const register = ({ email, password, name, avatar }) => {
-  console.log({ email, password, name, avatar });
   return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
