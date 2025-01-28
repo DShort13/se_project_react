@@ -41,7 +41,7 @@ function EditProfileModal({ onClose, isOpen, onEdit }) {
     <div>
       <ModalWithForm
         title="Change profile data"
-        buttonText="Save changes"
+        // buttonText="Save changes"
         onClose={onClose}
         isOpen={isOpen}
         onSubmit={handleSubmit}
@@ -74,7 +74,9 @@ function EditProfileModal({ onClose, isOpen, onEdit }) {
             onChange={handleAvatarChange}
           />
         </label>
-        {/* <div className="login__button-container">button.edit</div> */}
+        <button type="submit" className="modal__submit">
+          Save changes
+        </button>
       </ModalWithForm>
     </div>
   );

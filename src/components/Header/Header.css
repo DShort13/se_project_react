@@ -46,4 +46,22 @@
 .header__avatar {
   width: 40px;
   height: 40px;
+  border-radius: 20px;
+}
+
+.header__auth-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.header__signup {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header__login {
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }

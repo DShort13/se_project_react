@@ -40,7 +40,7 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
     <div>
       <ModalWithForm
         title="New garment"
-        buttonText="Add garment"
+        // buttonText="Add garment"
         onClose={onClose}
         isOpen={isOpen}
         onSubmit={handleSubmit}
@@ -116,6 +116,9 @@ function AddItemModal({ onClose, onAddItem, isOpen }) {
             <span>Cold</span>
           </label>
         </fieldset>
+        <button type="submit" className="modal__submit">
+          Add garment
+        </button>
       </ModalWithForm>
     </div>
   );

@@ -51,7 +51,7 @@ function RegisterModal({ onClose, handleLogInModal, onRegister, isOpen }) {
     <div>
       <ModalWithForm
         title="Sign Up"
-        buttonText="Sign Up"
+        // buttonText="Sign Up"
         onClose={onClose}
         isOpen={isOpen}
         onSubmit={handleSubmit}
@@ -113,15 +113,11 @@ function RegisterModal({ onClose, handleLogInModal, onRegister, isOpen }) {
           />
         </label>
         <div className="register__button-container">
-          {/* <button type="button" className="register__link">
-            Sign Up
-          </button> */}
-        </div>
-        <div className="register__signin">
+          <button className="modal__submit">Sign In</button>
           <button
             type="button"
             onClick={handleLogInModal}
-            className="register__login-link"
+            className="modal__login-link"
           >
             or Log In
           </button>

@@ -32,6 +32,8 @@
   color: #ff4d00;
   border: none;
   background: none;
+  padding: 0;
+  display: flex;
 }
 
 .modal__delete-btn:hover {
