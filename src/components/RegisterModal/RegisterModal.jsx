@@ -117,7 +117,7 @@ function RegisterModal({ onClose, handleLogInModal, onRegister, isOpen }) {
           <button
             type="button"
             onClick={handleLogInModal}
-            className="modal__login-link"
+            className="modal__alternate-link"
           >
             or Log In
           </button>
