@@ -22,10 +22,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   return (
     <li className="card">
       <div className="card__title-container">
-        <h2 className="card__title">
-          {item.name}
-          {/* <span className="card__title_type_background">{item.name}</span> */}
-        </h2>
+        <h2 className="card__title">{item.name}</h2>
         {currentUser?._id && (
           <button
             onClick={handleLike}

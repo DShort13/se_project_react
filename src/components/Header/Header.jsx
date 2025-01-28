@@ -71,19 +71,6 @@ function Header({
           </button>
         </div>
       )}
-      {/* <button
-        onClick={onCardClick}
-        type="button"
-        className="header__add-clothes-btn"
-      >
-        + Add clothes
-      </button>
-      <Link to="/profile" className="header__profile-link">
-        <div className="header__user-container">
-          <p className="header__username">Terrence Tegegne</p>
-          <img src={avatar} alt="Terrence Tegegne" className="header__avatar" />
-        </div>
-      </Link> */}
     </header>
   );
 }
