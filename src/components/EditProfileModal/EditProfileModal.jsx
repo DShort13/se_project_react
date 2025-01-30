@@ -27,9 +27,7 @@ function EditProfileModal({ onClose, isOpen, onEdit }) {
     } else {
       setName("");
     }
-  }, [currentUser]);
 
-  useEffect(() => {
     if (currentUser && currentUser.avatar) {
       setAvatar(currentUser.avatar);
     } else {
